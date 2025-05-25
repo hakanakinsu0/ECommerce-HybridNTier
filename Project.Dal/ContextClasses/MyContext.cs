@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Project.Dal.ContextClasses
 {
-    public class MyContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
+    public class MyContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public MyContext(DbContextOptions<MyContext> opt) : base(opt)
         {
@@ -22,6 +22,8 @@ namespace Project.Dal.ContextClasses
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new AppUserConfiguration());
+            builder.ApplyConfiguration(new AppRoleConfiguration());
+            builder.ApplyConfiguration(new AppUserRoleConfiguration());
             builder.ApplyConfiguration(new AppUserProfileConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new ProductConfiguration());
@@ -30,10 +32,12 @@ namespace Project.Dal.ContextClasses
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppUserRole> AppUserRoles { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<AppUserProfile> AppUserProfiles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
     }
 }

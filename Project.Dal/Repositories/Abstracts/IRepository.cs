@@ -11,10 +11,9 @@ namespace Project.Dal.Repositories.Abstracts
     public interface IRepository<T> where T : class, IEntity
     {
         //Queries
-
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
-        IQueryable<T> Where(Expression<Func<T,bool>> exp);
+        IQueryable<T> Where(Expression<Func<T, bool>> exp);
 
         //Commands
         Task CreateAsync(T entity);
