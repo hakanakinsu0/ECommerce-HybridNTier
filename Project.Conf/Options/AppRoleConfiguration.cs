@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace Project.Conf.Options
 {
-    public class CategoryConfiguration : BaseConfiguration<Category>
+    public class AppRoleConfiguration : BaseConfiguration<AppRole>
     {
-        public override void Configure(EntityTypeBuilder<Category> builder)
+        public override void Configure(EntityTypeBuilder<AppRole> builder)
         {
             base.Configure(builder);
+            builder.HasMany(x => x.AppUserRoles)
+                .WithOne(x => x.Role)
+                .HasForeignKey(x => x.RoleId)
+                .IsRequired();
         }
     }
 }
