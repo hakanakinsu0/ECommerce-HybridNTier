@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project.Dal.Repositories.Concretes
 {
-    public class AppUserProfileRepository(MyContext context) : BaseRepository<AppUserProfile>(context), IAppUserProfileRepository //Private Constructor
+    public class AppUserProfileRepository(MyContext context) : BaseRepository<AppUserProfile>(context), IAppUserProfileRepository 
     {
     }
 }

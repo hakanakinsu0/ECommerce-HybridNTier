@@ -9,10 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project.Dal.Repositories.Concretes
 {
-    public class AppRoleRepository : BaseRepository<AppRole>, IAppRoleRepository //Primary Constructer
+    public class AppRoleRepository(MyContext context) : BaseRepository<AppRole>(context), IAppRoleRepository 
     {
-        public AppRoleRepository(MyContext context) : base(context) //Primary Constructer
-        {
-        }
     }
 }

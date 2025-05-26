@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project.Dal.Repositories.Concretes
 {
-    public class OrderRepository(MyContext context) : BaseRepository<Order>(context), IOrderRepository //Private Constructor
+    public class OrderRepository(MyContext context) : BaseRepository<Order>(context), IOrderRepository 
     {
     }
 }

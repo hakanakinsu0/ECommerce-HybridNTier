@@ -20,6 +20,5 @@ namespace Project.Dal.Repositories.Abstracts
         Task UpdateAsync(T originalEntity, T newEntity);
         Task DeleteAsync(T entity);
         Task SaveChangesAsync();
-
     }
 }
