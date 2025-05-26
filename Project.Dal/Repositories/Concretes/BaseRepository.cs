@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Project.Dal.Repositories.Concretes
 {
-    public abstract class BaseRepository<T>  : IRepository<T> where T : class, IEntity
+    public abstract class BaseRepository<T> : IRepository<T> where T : class, IEntity
     {
         readonly MyContext _context;
 
@@ -41,6 +41,11 @@ namespace Project.Dal.Repositories.Concretes
         public async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(T originalEntity, T newEntity)
