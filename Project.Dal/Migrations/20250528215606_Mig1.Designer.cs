@@ -12,7 +12,7 @@ using Project.Dal.ContextClasses;
 namespace Project.Dal.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20250525221010_Mig1")]
+    [Migration("20250528215606_Mig1")]
     partial class Mig1
     {
         /// <inheritdoc />
@@ -156,6 +156,17 @@ namespace Project.Dal.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "ab5369e6-57c9-43a4-85e5-a01e8353ac65",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Admin",
+                            NormalizedName = "ADMIN",
+                            Status = 0
+                        });
                 });
 
             modelBuilder.Entity("Project.Entities.Models.AppUser", b =>
@@ -242,6 +253,28 @@ namespace Project.Dal.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ActivationCode = new Guid("00000000-0000-0000-0000-000000000000"),
+                            ConcurrencyStamp = "8dddbd46-e9e6-45f3-a13c-ae7941659364",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 586, DateTimeKind.Local).AddTicks(5732),
+                            Email = "cagri@gmail.com",
+                            EmailConfirmed = true,
+                            IsBanned = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CAGRI@GMAIL.COM",
+                            NormalizedUserName = "CGR123",
+                            PasswordHash = "AQAAAAIAAYagAAAAEInEsuDxZL08xijGjYsfBLDoJhi9zCWFVsJQiWp5E5SwPQr43ac8px8Y5hRALOvIvQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f277c88b-84ca-4730-bbcc-3bc77b2ff5f0",
+                            Status = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "cgr123"
+                        });
                 });
 
             modelBuilder.Entity("Project.Entities.Models.AppUserProfile", b =>
@@ -317,6 +350,16 @@ namespace Project.Dal.Migrations
                         .IsUnique();
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RoleId = 1,
+                            Status = 0,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("Project.Entities.Models.Category", b =>
@@ -350,6 +393,88 @@ namespace Project.Dal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Home",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8471),
+                            Description = "Adresini sit voluptatum bundan nostrum camisi koşuyorlar cesurca değerli beğendim.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Sports",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8532),
+                            Description = "Ut incidunt düşünüyor aut koyun sit et yapacakmış qui hesap.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Outdoors",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8573),
+                            Description = "Kalemi biber odio eius çorba ışık praesentium şafak gazete gazete.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryName = "Automotive",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8619),
+                            Description = "Sarmal suscipit quaerat adanaya çünkü çıktılar illo explicabo ve voluptatem.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryName = "Tools",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8654),
+                            Description = "Sed nemo yaptı esse incidunt reprehenderit koyun cesurca umut quia.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryName = "Garden",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8723),
+                            Description = "Dağılımı masanın bahar mıknatıslı sıfat çarpan hesap masaya voluptas alias.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryName = "Grocery",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8763),
+                            Description = "Aut illo magnam veniam odit yaptı modi karşıdakine ad doloremque.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryName = "Sports",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8797),
+                            Description = "Adresini voluptatum sit gülüyorum eum şafak sandalye anlamsız teldeki telefonu.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryName = "Beauty",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8832),
+                            Description = "Ama ex praesentium kulu mıknatıslı gidecekmiş hesap batarya telefonu yapacakmış.",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryName = "Automotive",
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(8892),
+                            Description = "Fugit karşıdakine iure qui şafak de dergi qui quam yapacakmış.",
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("Project.Entities.Models.Order", b =>
@@ -434,7 +559,7 @@ namespace Project.Dal.Migrations
                     b.HasIndex("OrderId", "ProductId")
                         .IsUnique();
 
-                    b.ToTable("OrderDetail");
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("Project.Entities.Models.Product", b =>
@@ -455,7 +580,6 @@ namespace Project.Dal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
@@ -483,6 +607,118 @@ namespace Project.Dal.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(9280),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Practical Granite Gloves",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 465.78m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(9448),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Handcrafted Granite Car",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 160.15m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(9588),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Handmade Plastic Bacon",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 573.63m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 4,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(9754),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Gorgeous Cotton Sausages",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 861.57m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 5,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 547, DateTimeKind.Local).AddTicks(9903),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Rustic Wooden Soap",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 27.39m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 6,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 548, DateTimeKind.Local).AddTicks(87),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Incredible Rubber Cheese",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 686.86m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 7,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 548, DateTimeKind.Local).AddTicks(235),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Licensed Concrete Computer",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 214.02m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 8,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 548, DateTimeKind.Local).AddTicks(414),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Intelligent Wooden Soap",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 27.64m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 9,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 548, DateTimeKind.Local).AddTicks(563),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Awesome Steel Soap",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 956.27m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 10,
+                            CreatedDate = new DateTime(2025, 5, 29, 0, 56, 6, 548, DateTimeKind.Local).AddTicks(739),
+                            ImagePath = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22grey%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E100x100%3C%2Ftext%3E%3C%2Fsvg%3E",
+                            ProductName = "Sleek Cotton Fish",
+                            Status = 1,
+                            UnitInStock = 100,
+                            UnitPrice = 390.20m
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

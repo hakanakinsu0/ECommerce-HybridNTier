@@ -6,6 +6,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextService();
 builder.Services.AddIdentityService();
+builder.Services.AddRepositoryServices();
+builder.Services.AddManagerServices();
 
 
 WebApplication app = builder.Build();

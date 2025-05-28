@@ -12,7 +12,7 @@ namespace Project.Entities.Models
         public decimal UnitPrice { get; set; }
         public int UnitInStock { get; set; }
         public string ImagePath { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         //Foreign Key
         public int CategoryId { get; set; }
