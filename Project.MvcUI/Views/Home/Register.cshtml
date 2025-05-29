@@ -1,9 +1,10 @@
 ﻿@model UserRegisterRequestModel
 
 <form asp-controller="Home" asp-action="Register" method="post" class="p-3 w-75 m-auto">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+
     <div class="mb-3">
-
-
         <label>Kullanıcı ismini giriniz</label>
         <input asp-for="UserName" class="form-control" />
     </div>

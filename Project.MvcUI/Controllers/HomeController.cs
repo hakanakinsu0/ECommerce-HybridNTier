@@ -17,21 +17,26 @@ namespace Project.MvcUI.Controllers
         readonly UserManager<AppUser> _userManager;
         readonly SignInManager<AppUser> _signInManager;
         readonly RoleManager<AppRole> _roleManager;
-        readonly IAppUserRoleManager appUserRoleManager;
+        readonly IAppUserRoleManager _appUserRoleManager;
 
         public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IAppUserRoleManager appUserRoleManager)
         {
+
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            this.appUserRoleManager = appUserRoleManager;
+            _appUserRoleManager = appUserRoleManager;
         }
+
+        #region IndexAction
 
         public IActionResult Index()
         {
             return View();
         }
+
+        #endregion
 
         public IActionResult Privacy()
         {
@@ -54,10 +59,13 @@ namespace Project.MvcUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterRequestModel item)
         {
-            //TODO : is validse kontrolu yapilacak
+            if (!ModelState.IsValid)
+            {
+                return View(item);
+            }
+
             Guid specId = Guid.NewGuid();
 
-            //Mapleme iþlemi
             AppUser appUser = new()
             {
                 UserName = item.UserName,
@@ -69,7 +77,6 @@ namespace Project.MvcUI.Controllers
 
             if (result.Succeeded)
             {
-
                 AppRole appRole = await _roleManager.FindByNameAsync("Member");
 
                 if (appRole == null) await _roleManager.CreateAsync(new() { Name = "Member" });
@@ -80,23 +87,33 @@ namespace Project.MvcUI.Controllers
                     UserId = appUser.Id
                 };
 
-                await appUserRoleManager.CreateAsync(appUserRole);
+                await _appUserRoleManager.CreateAsync(appUserRole);
 
+                string message = $@"
+                Merhaba {item.UserName},<br/><br/>
+                Hesabýnýz baþarýyla oluþturuldu. Aktifleþtirmek için lütfen aþaðýdaki linke týklayýn:<br/><br/>
+                <a href=""http://localhost:5116/Home/ConfirmEmail?specId={specId}&id={appUser.Id}"">Hesabý Onayla</a><br/><br/>
+                Teþekkürler.";
 
-                string message = $"Hesabiniz olusturulmustur. Uyeliginizi olusturmak icin lutfen http://localhost:5116/Home/ConfirmEmail?specId={specId}&id={appUser.Id} linkine tiklayiniz.";
+                MailSender.Send(receiver: item.Email,body: message,subject: "Hesap Aktivasyon");
 
-                MailSender.Send(item.Email, body: message);
                 TempData["Message"] = "Lutfen hesabinizi onaylamak icin emailinizi kontrol ediniz.";
 
                 return RedirectToAction("RedirectPanel");
             }
-            return View();
+            foreach (IdentityError err in result.Errors) ModelState.AddModelError(string.Empty, err.Description);
+
+            return View(item);
         }
 
         public IActionResult RedirectPanel()
         {
             return View();
         }
+
+        #endregion
+        
+        #region ConfirmEmailAction
 
         public async Task<IActionResult> ConfirmEmail(Guid specId, string id)
         {

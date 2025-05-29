@@ -35,7 +35,8 @@ namespace Project.Common.Tools
             using (MailMessage message = new MailMessage(senderEmail, receiverEmail)
             {
                 Subject = subject,
-                Body = body
+                Body = body,
+                IsBodyHtml = true
             })
             {
                 smtpClient.Send(message);
