@@ -27,13 +27,9 @@ namespace Project.Dal.BogusHandling
                     ImagePath = new Images().DataUri(100, 100),
                     CreatedDate = DateTime.Now,
                     Status = Entities.Enums.DataStatus.Inserted
-
-
                 };
-
                 products.Add(p);
             }
-
             builder.Entity<Product>().HasData(products);
         }
     }

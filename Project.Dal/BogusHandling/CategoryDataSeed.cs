@@ -11,8 +11,6 @@ namespace Project.Dal.BogusHandling
 {
     public static class CategoryDataSeed
     {
-
-
         public static void SeedCategories(ModelBuilder builder)
         {
 
@@ -28,11 +26,8 @@ namespace Project.Dal.BogusHandling
                     CreatedDate = DateTime.Now,
                     Status = Entities.Enums.DataStatus.Inserted
                 };
-
                 categories.Add(c);
-
             }
-
             builder.Entity<Category>().HasData(categories);
         }
     }

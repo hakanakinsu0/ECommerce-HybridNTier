@@ -11,7 +11,6 @@ namespace Project.Bll.Managers.Abstracts
     public interface IManager<T> where T : class, IEntity
     {
         //BL for Queries (Sorgulamar)
-
         Task<List<T>> GetAllAsync(); 
         Task<T> GetByIdAsync(int id); 
         List<T> GetActives();
@@ -21,9 +20,7 @@ namespace Project.Bll.Managers.Abstracts
         Task<List<T>> LastDatas(int count); 
         Task<List<T>> FirstDatas(int count);
 
-
         //BL for Commands (Emirler)
-
         Task CreateAsync(T entity); 
         Task CreateRangAsync(List<T> entities); 
         Task UpdateAsync(T newEntity); 
