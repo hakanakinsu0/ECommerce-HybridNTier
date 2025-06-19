@@ -1,0 +1,53 @@
+﻿@using Project.Entities.Models
+@model List<Product>
+
+@TempData["Message"]
+
+<section class="panel">
+    <header class="panel-heading">
+        Yeni ürün yaratmak icin <a asp-action="Create" asp-controller="Product">tıklayınız</a>
+    </header>
+    <div class="panel-body">
+        <div class="adv-table">
+            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                <thead>
+                    <tr>
+                        <th>Urun ID</th>
+                        <th>Urun İsmi</th>
+                        <th>Resmi</th>
+                        <th class="hidden-phone">Fiyat</th>
+                        <th>Kategorisi</th>
+                        <th class="hidden-phone">Veri Durumu</th>
+                        <th>Pasife cek</th>
+                        <th class="hidden-phone">Güncelleme</th>
+                        <th class="hidden-phone">Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (Product item in Model)
+                    {
+                        <tr class="gradeX">
+                            <td>@item.Id</td>
+                            <td>
+                                @item.ProductName
+                            </td>
+                            <td> <img src="@item.ImagePath" width="50" height="50" />  </td>
+                            <td class="hidden-phone">@item.UnitPrice</td>
+                            @*Eger kategorisi olmayan ürünleriniz bir karar mekanizmasıyla tasarımı düzenlemeniz gerekir*@
+                            <td class="hidden-phone">@item.Category.CategoryName</td>
+                            <td class="center hidden-phone">@item.Status</td>
+                            <td class="center hidden-phone"> <a asp-controller="Product" asp-action="Pacify" asp-route-id="@item.Id" class="btn btn-warning">Pasife Cek</a>   </td>
+                            <td class="center hidden-phone"> <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">Güncelle</a>   </td>
+                            <td class="center hidden-phone">  <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Sil</a>   </td>
+                        </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>

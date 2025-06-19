@@ -9,6 +9,8 @@ builder.Services.AddIdentityService();
 builder.Services.AddRepositoryServices();
 builder.Services.AddManagerServices();
 
+builder.Services.AddHttpClient(); //API ile entegre etmek icin HttpClient ekliyoruz.
+
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(x =>
@@ -17,6 +19,7 @@ builder.Services.AddSession(x =>
     x.Cookie.HttpOnly = true;
     x.Cookie.IsEssential = true;
 });
+
 
 builder.Services.ConfigureApplicationCookie(x =>
 {
@@ -36,10 +39,18 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area}/{controller=Category}/{action=Index}/{id?}"
+    );
+
+app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Register}/{id?}");
+    pattern: "{controller=Shopping}/{action=Index}/{id?}");
 
 app.Run();
+

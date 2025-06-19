@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Project.Common.Tools;
 using System.Threading.Tasks;
 using Project.Bll.Managers.Abstracts;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Project.MvcUI.Controllers
 {
@@ -29,14 +30,7 @@ namespace Project.MvcUI.Controllers
             _appUserRoleManager = appUserRoleManager;
         }
 
-        #region IndexAction
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        #endregion
+        #region HomeControllerAutomaticActions
 
         public IActionResult Privacy()
         {
@@ -48,6 +42,17 @@ namespace Project.MvcUI.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #endregion
+
+        #region IndexAction
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        #endregion
 
         #region RegisterAction
 
@@ -77,9 +82,10 @@ namespace Project.MvcUI.Controllers
 
             if (result.Succeeded)
             {
-                AppRole appRole = await _roleManager.FindByNameAsync("Member");
 
-                if (appRole == null) await _roleManager.CreateAsync(new() { Name = "Member" });
+                if (!await _roleManager.RoleExistsAsync("Member")) await _roleManager.CreateAsync(new() { Name = "Member" });
+
+                AppRole appRole = await _roleManager.FindByNameAsync("Member");
 
                 AppUserRole appUserRole = new()
                 {
@@ -95,7 +101,7 @@ namespace Project.MvcUI.Controllers
                 <a href=""http://localhost:5116/Home/ConfirmEmail?specId={specId}&id={appUser.Id}"">Hesabý Onayla</a><br/><br/>
                 Teþekkürler.";
 
-                MailSender.Send(receiver: item.Email,body: message,subject: "Hesap Aktivasyon");
+                MailSender.Send(receiver: item.Email, body: message, subject: "Hesap Aktivasyon");
 
                 TempData["Message"] = "Lutfen hesabinizi onaylamak icin emailinizi kontrol ediniz.";
 
@@ -112,7 +118,7 @@ namespace Project.MvcUI.Controllers
         }
 
         #endregion
-        
+
         #region ConfirmEmailAction
 
         public async Task<IActionResult> ConfirmEmail(Guid specId, string id)
@@ -141,7 +147,42 @@ namespace Project.MvcUI.Controllers
         public IActionResult SignIn()
         {
             return View();
-        } 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn(UserRegisterRequestModel model)
+        {
+            AppUser appUser = await _userManager.FindByNameAsync(model.UserName);
+
+            SignInResult result = await _signInManager.PasswordSignInAsync(appUser, model.Password, true, true);
+
+            if (result.Succeeded)
+            {
+                IList<string> roles = await _userManager.GetRolesAsync(appUser);
+                if (roles.Contains("Admin"))
+                {
+                    return RedirectToAction("Index", "Category", new { Area = "Admin" });
+                }
+
+                else if (roles.Contains("Member"))
+                {
+                    return RedirectToAction("Privacy");
+                }
+                return RedirectToAction("Index");
+            }
+
+            else if (result.IsNotAllowed)
+            {
+                return RedirectToAction("MailPanel");
+            }
+            TempData["Message"] = "Kullanici bulunamadi";
+            return RedirectToAction("SignIn");
+        }
+
+        public IActionResult MailPanel()
+        {
+            return View();
+        }
 
         #endregion
     }

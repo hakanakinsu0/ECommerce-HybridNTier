@@ -1,0 +1,51 @@
+﻿@using Project.MvcUI.Areas.Admin.Models.PageVms
+@model CreateProductPageVm
+
+@*
+Eger Form üzerinden bir dosya göndermek istiyor iseniz bilmeniz gerekir ki bu ModelBinding olamaz...ModelBinding sadece primitive veya primitive type gibi davranan verilerin entegre olabilecegi bir sistemdir...Dosya dediginiz sistem modelbinding ayrı gönderilmek zorundadır...Bunun icin de yapmanız gereken şey Form'unuza özellikle bir dosya göndermek istediginiz belirtmenizdir.Bunun icin de Form tag'inizin özel bir attribute'a sahip olması lazım...
+
+*@
+
+<form asp-action="Create" asp-controller="Product" method="post" class="p-3 w-75 m-auto" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>Ürün ismi giriniz</label>
+        <input asp-for="Product.ProductName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Acıklama giriniz</label>
+        <input asp-for="Product.Description" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Fiyat giriniz</label>
+        <input asp-for="Product.UnitPrice" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Kategori giriniz</label>
+        <select asp-for="Product.CategoryId" asp-items='new SelectList(Model.Categories, "Id", "CategoryName")'>
+            Lutfen Kategori seciniz
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Stok giriniz</label>
+        <input asp-for="Product.UnitInStock" class="form-control" />
+    </div>
+
+
+    @*
+        Eger MVC'de modelBinding yapmadıgınız halde gönderdiginiz verinin Post Request'inizi karsılayacak ACtion tarafından algılanabilmesini istiyorsanız name attribute'unu kullanmalısınız ve ona verdiginiz deger dikkat etmelisiniz
+    *@
+
+    <div class="mb-3">
+        <label>Resim yükleyiniz</label>
+        <input type="file" name="formFile" class="form-control" />
+    </div>
+
+
+    <div class="mb-3">
+        <button class="btn btn-primary">Ürün ekle</button>
+    </div>
+</form>

@@ -9,6 +9,11 @@ namespace Project.MvcUI.Models.ShoppingTools
         [JsonProperty("_myCart")]
         Dictionary<int, CartItem> _myCart;
 
+        public Cart()
+        {
+            _myCart = new Dictionary<int, CartItem>();
+        }
+
         [JsonProperty("GetCartItems")]
         public List<CartItem> GetCartItems
         {
